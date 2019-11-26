@@ -12,11 +12,11 @@ composer require radicalloop/laravel5-dkim:dev-master
 ```
 3. In `config/app.php`, add following line to `providers` array:
 ```
-Radicalloop\LaravelDkim\DkimMailServiceProvider::class,
+RadicalLoop\LaravelDkim\DkimMailServiceProvider::class,
 ```
 4. Fill your settings in `config/mail.php`:
 ```
-'dkim_should_sign' => env('MAIL_DKIM_SHOULD_SIGN'), // 0 / 1, if set to 0, signing is skipped. Useful for conditional signing.
+'dkim_should_sign' => env('MAIL_DKIM_SHOULD_SIGN'), // yes / no, if set to no, signing is skipped. Useful for conditional signing.
 'dkim_selector' => env('MAIL_DKIM_SELECTOR'), // selector, required
 'dkim_domain' => env('MAIL_DKIM_DOMAIN'), // domain, required
 'dkim_private_key' => env('MAIL_DKIM_PRIVATE_KEY'), // private key, required
@@ -24,3 +24,8 @@ Radicalloop\LaravelDkim\DkimMailServiceProvider::class,
 'dkim_algo' => env('MAIL_DKIM_ALGO'), // sign algorithm (defaults to rsa-sha256), optional
 'dkim_passphrase' => env('MAIL_DKIM_PASSPHRASE'), // private key passphrase, optional
 ```
+
+TODO
+----
+
+* tests

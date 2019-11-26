@@ -1,0 +1,22 @@
+{
+    "name": "radicalloop/laravel5-dkim",
+    "description": "A Laravel 5.x package to conditionally sign outgoing emails with DKIM.",
+    "license": "MIT",
+    "keywords": ["laravel", "dkim", "email", "spam"],
+    "authors": [
+        {
+            "name": "Prashant Patel",
+            "email": "hello@radicalloop.com",
+            "homepage": "https://www.radicalloop.com/",
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "laravel/framework": "5.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "RadicalLoop\\LaravelDkim\\": "src/"
+        }
+    }
+}
