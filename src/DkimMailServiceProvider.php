@@ -23,8 +23,6 @@ class DkimMailServiceProvider extends MailServiceProvider
                 $app['view'], $app['swift.mailer'], $app['events']
             );
 
-            $mailer->setQueue($app['queue']);
-
             if (method_exists($this, 'setMailerDependencies')) {
                 $this->setMailerDependencies($mailer, $app);
             }
@@ -43,6 +41,13 @@ class DkimMailServiceProvider extends MailServiceProvider
             if (is_array($to) && isset($to['address'])) {
                 $mailer->alwaysTo($to['address'], $to['name']);
             }
+
+            // Here we will determine if the mailer should be in "pretend" mode for this
+            // environment, which will simply write out e-mail to the logs instead of
+            // sending it over the web, which is useful for local dev environments.
+            $pretend = $app['config']->get('mail.pretend', false);
+
+            $mailer->pretend($pretend);
 
             return $mailer;
         });
