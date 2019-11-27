@@ -4,7 +4,7 @@ Sign outgoing emails with DKIM in early Laravel 5 versions
 ## Installation
 1. Install via Composer:
 ```
-composer require radicalloop/laravel5-dkim
+composer require radicalloop/laravel5-dkim:dev-master
 ```
 2. In `config/app.php`, comment out original service provider from `providers` array:
 ```
