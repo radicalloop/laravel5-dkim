@@ -19,14 +19,14 @@ class Mailer extends \Illuminate\Mail\Mailer
 
         if ($this->shouldSignDKIM()) {
             if (in_array(strtolower(config('mail.driver')), ['smtp', 'sendmail', 'log'])) {
-                if (config('mail.dkim_private_key') &&
+                if ($this->isDkimPrivateKeySet() &&
                     config('mail.dkim_selector') &&
                     config('mail.dkim_domain')
                 ) {
                     $message->attachDkim(
                         config('mail.dkim_selector'),
                         config('mail.dkim_domain'),
-                        config('mail.dkim_private_key'),
+                        file_get_contents(config('mail.dkim_private_key_path')),
                         config('mail.dkim_passphrase')
                     );
                 }
@@ -41,4 +41,12 @@ class Mailer extends \Illuminate\Mail\Mailer
         return (strtolower(config('mail.dkim_should_sign')) != 'no');
     }
 
+    private function isDkimPrivateKeySet()
+    {
+        return (
+            config('mail.dkim_private_key_path') &&
+            file_exists(config('mail.dkim_private_key_path')) &&
+            filesize(config('mail.dkim_private_key_path'))
+        );
+    }
 }
